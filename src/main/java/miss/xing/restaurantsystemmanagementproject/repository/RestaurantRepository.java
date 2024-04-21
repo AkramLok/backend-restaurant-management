@@ -1,7 +1,6 @@
 package miss.xing.restaurantsystemmanagementproject.repository;
 
 import miss.xing.restaurantsystemmanagementproject.entity.Client;
-import miss.xing.restaurantsystemmanagementproject.entity.Menu;
 import miss.xing.restaurantsystemmanagementproject.entity.Restaurant;
 import miss.xing.restaurantsystemmanagementproject.entity.RestaurantOwner;
 import org.springframework.data.jpa.repository.JpaRepository;

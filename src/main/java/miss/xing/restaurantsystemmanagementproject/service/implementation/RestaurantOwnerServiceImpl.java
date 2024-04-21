@@ -32,6 +32,12 @@ public class RestaurantOwnerServiceImpl implements RestaurantOwnerService {
     }
 
     @Override
+    public RestaurantOwner getRestaurantOwnerByEmail(String email) {
+        return restaurantOwnerRepository.findByEmail(email);
+    }
+
+
+    @Override
     public void saveRestaurantOwner(RestaurantOwner restaurantOwner) {
         restaurantOwnerRepository.save(restaurantOwner);
     }
@@ -44,10 +50,8 @@ public class RestaurantOwnerServiceImpl implements RestaurantOwnerService {
         }
         else
         {
-            // just
             System.out.println("This Restaurant Owner doesn't exist !");
         }
-        // Handle error if the entity with the given ID doesn't exist
         return null;
     }
 
@@ -65,9 +69,9 @@ public class RestaurantOwnerServiceImpl implements RestaurantOwnerService {
         return null;
     }
 
+
     @Override
     public RestaurantOwner createRestaurantOwner(RestaurantOwner owner) {
-        // Save the new restaurant owner
         return restaurantOwnerRepository.save(owner);
     }
 

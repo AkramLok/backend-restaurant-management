@@ -1,5 +1,6 @@
 package miss.xing.restaurantsystemmanagementproject.service.interfaces;
 
+import miss.xing.restaurantsystemmanagementproject.dto.RestaurantDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.Client;
 import miss.xing.restaurantsystemmanagementproject.entity.Restaurant;
 import miss.xing.restaurantsystemmanagementproject.entity.RestaurantOwner;
@@ -30,6 +31,8 @@ public interface RestaurantService {
     List<Restaurant> getRestaurantsWithPercentageDiscountOffer();
 
     Restaurant createRestaurant(Restaurant restaurant);
+
+    Restaurant convertToEntity(RestaurantDTO restaurantDTODTO);
 
     // Other service methods as needed
 }

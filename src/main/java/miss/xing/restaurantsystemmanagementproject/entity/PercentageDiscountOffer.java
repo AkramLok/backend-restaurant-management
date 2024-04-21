@@ -34,8 +34,8 @@ public class PercentageDiscountOffer {
 
     @ManyToMany
     @JoinTable(
-            name = "product_percentage_discount_offer",
-            joinColumns = @JoinColumn(name = "percentage_discount_offer_id"),
+            name = "product_percentage-discount_offer",
+            joinColumns = @JoinColumn(name = "percentage_discount_-offer_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> products;

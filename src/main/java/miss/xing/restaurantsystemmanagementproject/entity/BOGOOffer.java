@@ -34,7 +34,7 @@ public class BOGOOffer {
 
     @ManyToMany
     @JoinTable(
-            name = "bogo_offer_products",
+            name = "bogo-offer_products",
             joinColumns = @JoinColumn(name = "bogo_offer_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )

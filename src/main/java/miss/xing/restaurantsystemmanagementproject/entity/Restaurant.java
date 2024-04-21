@@ -43,7 +43,7 @@ public class Restaurant {
     private RestaurantOwner restaurantOwner;
 
     @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
-    private List<Menu> menus;
+    private List<Category> categories;
 
     @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
     private List<Server> servers;

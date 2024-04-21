@@ -36,14 +36,14 @@ public class Order {
     private List<Item> items;
     @ManyToMany
     @JoinTable(
-            name = "order_bogo_offer",
+            name = "order_bogo-offer",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "bogo_offer_id")
     )
     private List<BOGOOffer> bogoOffers;
     @ManyToMany
     @JoinTable(
-            name = "order_percentage_discount_offer",
+            name = "order_percentage-discount_offer",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "percentage_discount_offer_id")
     )

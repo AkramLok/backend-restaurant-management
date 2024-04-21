@@ -1,7 +1,6 @@
 package miss.xing.restaurantsystemmanagementproject.dto;
 
 public class RestaurantOwnerDTO {
-
     private Long id;
     private String firstName;
     private String lastName;

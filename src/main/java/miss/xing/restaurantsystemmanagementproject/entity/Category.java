@@ -27,8 +27,8 @@ public class Category {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "menu_id")
-    private Menu menu;
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
 
     @OneToMany(mappedBy = "category" , cascade = CascadeType.ALL)
     private List<Product> products;

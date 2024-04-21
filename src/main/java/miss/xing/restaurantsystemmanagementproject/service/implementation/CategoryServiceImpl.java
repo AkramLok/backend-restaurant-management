@@ -1,8 +1,8 @@
 package miss.xing.restaurantsystemmanagementproject.service.implementation;
 
 import miss.xing.restaurantsystemmanagementproject.entity.Category;
-import miss.xing.restaurantsystemmanagementproject.entity.Menu;
 import miss.xing.restaurantsystemmanagementproject.entity.Product;
+import miss.xing.restaurantsystemmanagementproject.entity.Restaurant;
 import miss.xing.restaurantsystemmanagementproject.repository.CategoryRepository;
 import miss.xing.restaurantsystemmanagementproject.service.interfaces.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +52,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> getCategoriesByMenu(Menu menu) {
-        return categoryRepository.findByMenu(menu);
+    public List<Category> getCategoriesByRestaurant(Restaurant restaurant) {
+        return categoryRepository.findByRestaurant(restaurant);
     }
 
     @Override

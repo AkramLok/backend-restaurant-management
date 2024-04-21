@@ -12,6 +12,8 @@ public interface RestaurantOwnerService {
 
     RestaurantOwner getRestaurantOwnerById(Long id);
 
+    RestaurantOwner getRestaurantOwnerByEmail(String email);
+
     void saveRestaurantOwner(RestaurantOwner restaurantOwner);
 
     RestaurantOwner updateRestaurantOwner(Long id, RestaurantOwner restaurantOwner);

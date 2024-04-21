@@ -1,8 +1,8 @@
 package miss.xing.restaurantsystemmanagementproject.service.interfaces;
 
 import miss.xing.restaurantsystemmanagementproject.entity.Category;
-import miss.xing.restaurantsystemmanagementproject.entity.Menu;
 import miss.xing.restaurantsystemmanagementproject.entity.Product;
+import miss.xing.restaurantsystemmanagementproject.entity.Restaurant;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public interface CategoryService {
 
     void deleteCategory(Long id);
 
-    List<Category> getCategoriesByMenu(Menu menu);
+    List<Category> getCategoriesByRestaurant(Restaurant restaurant);
 
     List<Category> searchCategoriesByName(String keyword);
 

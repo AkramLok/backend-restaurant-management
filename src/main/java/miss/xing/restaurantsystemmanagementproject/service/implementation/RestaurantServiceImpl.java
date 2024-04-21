@@ -1,8 +1,11 @@
 package miss.xing.restaurantsystemmanagementproject.service.implementation;
 
+import miss.xing.restaurantsystemmanagementproject.dto.RestaurantDTO;
+import miss.xing.restaurantsystemmanagementproject.dto.RestaurantOwnerDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.Client;
 import miss.xing.restaurantsystemmanagementproject.entity.Restaurant;
 import miss.xing.restaurantsystemmanagementproject.entity.RestaurantOwner;
+import miss.xing.restaurantsystemmanagementproject.repository.RestaurantOwnerRepository;
 import miss.xing.restaurantsystemmanagementproject.repository.RestaurantRepository;
 import miss.xing.restaurantsystemmanagementproject.service.interfaces.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,9 @@ import java.util.stream.Collectors;
 public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+
+    @Autowired
+    public RestaurantOwnerRepository restaurantOwnerRepository;
 
     @Autowired
     public RestaurantServiceImpl(RestaurantRepository restaurantRepository) {
@@ -92,5 +98,28 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
+
+    @Override
+    public Restaurant convertToEntity(RestaurantDTO restaurantDTO) {
+        if (restaurantDTO == null) {
+            return null;
+        }
+        return new Restaurant(
+                restaurantDTO.getId(),
+                restaurantDTO.getName(),
+                restaurantDTO.getLocation(),
+                restaurantDTO.getEmail(),
+                restaurantDTO.getPhone(),
+                restaurantDTO.getOpeningHours(),
+                restaurantDTO.getStatus(),
+                restaurantOwnerRepository.findByEmail(restaurantDTO.getOwnerEmail()),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+    }
     // Implement other service methods as needed
 }

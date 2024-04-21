@@ -43,7 +43,7 @@ public class LoyaltyPointsOffer {
 
     @ManyToMany
     @JoinTable(
-            name = "product_loyalty_points_program",
+            name = "product_loyalty-points-program",
             joinColumns = @JoinColumn(name = "loyalty_points_program_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
