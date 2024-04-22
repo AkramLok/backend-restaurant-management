@@ -17,4 +17,6 @@ public interface RestaurantRepository extends JpaRepository<Restaurant,Long> {
 
     List<Restaurant> findByClientsContaining(Client client);
 
+    List<Restaurant> findByRestaurantOwnerEmail(String email);
+
 }

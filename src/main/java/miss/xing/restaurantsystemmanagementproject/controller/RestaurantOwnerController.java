@@ -20,7 +20,7 @@ public class RestaurantOwnerController {
         this.restaurantOwnerService = restaurantOwnerService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<RestaurantOwner> getAllRestaurantOwners() {
         return restaurantOwnerService.getAllRestaurantOwners();
     }

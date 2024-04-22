@@ -35,6 +35,13 @@ public class RestaurantController {
 
     @GetMapping("/all")
     public List<Restaurant> getAllRestaurants() {
+        System.out.println("sddsssssssssssssssssssssssssssssssssssssss");
+        return restaurantService.getAllRestaurants();
+    }
+
+    @GetMapping("/all/{email}")
+    public List<Restaurant> getAllRestaurantsByEmail() {
+        System.out.println("sddsssssssssssssssssssssssssssssssssssssss");
         return restaurantService.getAllRestaurants();
     }
 
@@ -47,6 +54,7 @@ public class RestaurantController {
     @PostMapping("/create")
     public ResponseEntity<?> createRestaurant(@RequestBody RestaurantDTO restaurantDTO) {
         System.out.println("HEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRREEEEEEEEEEeee");
+        System.out.println(restaurantDTO.getEmail()+" "+restaurantDTO.getPhone()+" "+ restaurantDTO.getStatus());
         Restaurant createdRestaurant = restaurantService.createRestaurant(restaurantService.convertToEntity(restaurantDTO));
         RestaurantOwner restaurantOwnerToUpdate = restaurantOwnerRepository.findByEmail(restaurantDTO.getOwnerEmail());
         List<Restaurant> restaurantList = new ArrayList<>();

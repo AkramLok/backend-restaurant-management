@@ -1,7 +1,6 @@
 package miss.xing.restaurantsystemmanagementproject.service.implementation;
 
 import miss.xing.restaurantsystemmanagementproject.dto.RestaurantDTO;
-import miss.xing.restaurantsystemmanagementproject.dto.RestaurantOwnerDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.Client;
 import miss.xing.restaurantsystemmanagementproject.entity.Restaurant;
 import miss.xing.restaurantsystemmanagementproject.entity.RestaurantOwner;
@@ -73,6 +72,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
+    public List<Restaurant> getRestaurantsByRestaurantOwnerEmail(String email) {
+        return restaurantRepository.findByRestaurantOwnerEmail(email);
+    }
+
+    @Override
     public List<Restaurant> getRestaurantsWithBOGOOffer() {
         return restaurantRepository.findAll().stream()
                 .filter(restaurant -> !restaurant.getBogoOffers().isEmpty())
@@ -108,8 +112,8 @@ public class RestaurantServiceImpl implements RestaurantService {
                 restaurantDTO.getId(),
                 restaurantDTO.getName(),
                 restaurantDTO.getLocation(),
-                restaurantDTO.getEmail(),
                 restaurantDTO.getPhone(),
+                restaurantDTO.getEmail(),
                 restaurantDTO.getOpeningHours(),
                 restaurantDTO.getStatus(),
                 restaurantOwnerRepository.findByEmail(restaurantDTO.getOwnerEmail()),

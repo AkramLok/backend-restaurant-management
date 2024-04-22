@@ -24,6 +24,8 @@ public interface RestaurantService {
 
     List<Restaurant> getRestaurantsByClient(Client client);
 
+    List<Restaurant> getRestaurantsByRestaurantOwnerEmail(String email);
+
     List<Restaurant> getRestaurantsWithBOGOOffer();
 
     List<Restaurant> getRestaurantsWithLoyaltyPointsOffer();
