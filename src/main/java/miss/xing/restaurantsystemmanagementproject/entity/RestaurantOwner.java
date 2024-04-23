@@ -1,5 +1,6 @@
 package miss.xing.restaurantsystemmanagementproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.yaml.snakeyaml.DumperOptions;
@@ -12,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "restaurant-owners")
+@Table(name = "restaurant_owners")
 public class RestaurantOwner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
