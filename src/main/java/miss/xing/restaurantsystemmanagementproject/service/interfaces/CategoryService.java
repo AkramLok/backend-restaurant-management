@@ -1,5 +1,6 @@
 package miss.xing.restaurantsystemmanagementproject.service.interfaces;
 
+import miss.xing.restaurantsystemmanagementproject.dto.CategoryDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.Category;
 import miss.xing.restaurantsystemmanagementproject.entity.Product;
 import miss.xing.restaurantsystemmanagementproject.entity.Restaurant;
@@ -25,4 +26,6 @@ public interface CategoryService {
     List<Category> searchCategoriesByDescription(String keyword);
 
     List<Category> getCategoriesContainingProduct(Product product);
+
+    Category convertToEntity(CategoryDTO categoryDTO);
 }

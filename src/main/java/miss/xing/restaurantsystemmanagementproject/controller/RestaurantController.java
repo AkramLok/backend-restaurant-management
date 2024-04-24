@@ -35,14 +35,12 @@ public class RestaurantController {
 
     @GetMapping("/all")
     public List<Restaurant> getAllRestaurants() {
-        System.out.println("sddsssssssssssssssssssssssssssssssssssssss");
         return restaurantService.getAllRestaurants();
     }
 
-    @GetMapping("/all/{email}")
-    public List<Restaurant> getAllRestaurantsByEmail() {
-        System.out.println("sddsssssssssssssssssssssssssssssssssssssss");
-        return restaurantService.getAllRestaurants();
+    @GetMapping("/all/{id}")
+    public List<Restaurant> getAllRestaurantsById(@PathVariable Long id) {
+        return restaurantService.getRestaurantsByOwner(restaurantOwnerService.getRestaurantOwnerById(id));
     }
 
     @GetMapping("/{id}")
@@ -53,8 +51,6 @@ public class RestaurantController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createRestaurant(@RequestBody RestaurantDTO restaurantDTO) {
-        System.out.println("HEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRREEEEEEEEEEeee");
-        System.out.println(restaurantDTO.getEmail()+" "+restaurantDTO.getPhone()+" "+ restaurantDTO.getStatus());
         Restaurant createdRestaurant = restaurantService.createRestaurant(restaurantService.convertToEntity(restaurantDTO));
         RestaurantOwner restaurantOwnerToUpdate = restaurantOwnerRepository.findByEmail(restaurantDTO.getOwnerEmail());
         List<Restaurant> restaurantList = new ArrayList<>();
@@ -62,6 +58,8 @@ public class RestaurantController {
         restaurantOwnerToUpdate.setRestaurants(restaurantList);
         restaurantOwnerService.updateRestaurantOwner(restaurantOwnerToUpdate.getId(),restaurantOwnerToUpdate);
         //return ResponseEntity.status(HttpStatus.CREATED).body(createdRestaurant);
+        System.out.println("Restaurant Created !");
+        System.out.println(restaurantDTO.getEmail()+" "+restaurantDTO.getPhone()+" "+ restaurantDTO.getStatus());
         return ResponseEntity.ok(new MessageResponse("Restaurant created successfully!"));
     }
 

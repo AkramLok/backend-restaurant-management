@@ -1,5 +1,6 @@
 package miss.xing.restaurantsystemmanagementproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -39,6 +40,7 @@ public class Restaurant {
     private String status;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "owner_id")
     private RestaurantOwner restaurantOwner;
 

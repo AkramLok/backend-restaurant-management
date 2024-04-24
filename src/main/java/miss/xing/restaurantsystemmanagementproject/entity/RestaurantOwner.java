@@ -1,6 +1,7 @@
 package miss.xing.restaurantsystemmanagementproject.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.yaml.snakeyaml.DumperOptions;
@@ -32,6 +33,7 @@ public class RestaurantOwner {
     private String address;
 
     @OneToMany(mappedBy = "restaurantOwner",cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Restaurant> restaurants;
 
 }

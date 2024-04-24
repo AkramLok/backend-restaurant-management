@@ -1,10 +1,12 @@
 package miss.xing.restaurantsystemmanagementproject.service.implementation;
 
+import miss.xing.restaurantsystemmanagementproject.dto.CategoryDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.Category;
 import miss.xing.restaurantsystemmanagementproject.entity.Product;
 import miss.xing.restaurantsystemmanagementproject.entity.Restaurant;
 import miss.xing.restaurantsystemmanagementproject.repository.CategoryRepository;
 import miss.xing.restaurantsystemmanagementproject.service.interfaces.CategoryService;
+import miss.xing.restaurantsystemmanagementproject.service.interfaces.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryServiceImpl(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
+
+    @Autowired
+    public RestaurantService restaurantService;
 
     @Override
     public List<Category> getAllCategories() {
@@ -71,6 +76,17 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryRepository.findByProductsContaining(product);
     }
 
-
-    // Implement other service methods as needed
+    @Override
+    public Category convertToEntity(CategoryDTO categoryDTO) {
+        if (categoryDTO == null) {
+            return null;
+        }
+        return new Category(
+                categoryDTO.getId(),
+                categoryDTO.getName(),
+                categoryDTO.getDescription(),
+                restaurantService.getRestaurantById(categoryDTO.getRestaurantId()),
+                null
+        );
+    }
 }
