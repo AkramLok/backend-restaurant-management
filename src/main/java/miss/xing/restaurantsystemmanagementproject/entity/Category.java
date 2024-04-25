@@ -1,5 +1,7 @@
 package miss.xing.restaurantsystemmanagementproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,9 +29,11 @@ public class Category {
     private String description;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @OneToMany(mappedBy = "category" , cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Product> products;
 }

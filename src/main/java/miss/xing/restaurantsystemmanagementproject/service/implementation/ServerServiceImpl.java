@@ -1,7 +1,11 @@
 package miss.xing.restaurantsystemmanagementproject.service.implementation;
 
+import miss.xing.restaurantsystemmanagementproject.dto.ServerDTO;
+import miss.xing.restaurantsystemmanagementproject.entity.Restaurant;
 import miss.xing.restaurantsystemmanagementproject.entity.Server;
+import miss.xing.restaurantsystemmanagementproject.repository.RestaurantRepository;
 import miss.xing.restaurantsystemmanagementproject.repository.ServerRepository;
+import miss.xing.restaurantsystemmanagementproject.service.interfaces.RestaurantService;
 import miss.xing.restaurantsystemmanagementproject.service.interfaces.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +16,9 @@ import java.util.List;
 public class ServerServiceImpl implements ServerService {
 
     private final ServerRepository serverRepository;
+
+    @Autowired
+    private RestaurantService restaurantService;
 
     @Autowired
     public ServerServiceImpl(ServerRepository serverRepository) {
@@ -70,7 +77,17 @@ public class ServerServiceImpl implements ServerService {
         return serverRepository.findByPhoneContaining(phone);
     }
 
-    // Other methods as needed
-
-    // Implement other service methods as needed
+    @Override
+    public Server convertToEntity(ServerDTO serverDTO) {
+        Server server = new Server();
+        server.setId(serverDTO.getId());
+        server.setFirstName(serverDTO.getFirstName());
+        server.setLastName(serverDTO.getLastName());
+        server.setEmail(serverDTO.getEmail());
+        server.setPhone(serverDTO.getPhone());
+        server.setAddress(serverDTO.getAddress());
+        Restaurant restaurant = restaurantService.getRestaurantById(serverDTO.getRestaurantId());
+        server.setRestaurant(restaurant);
+        return server;
+    }
 }

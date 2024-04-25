@@ -26,15 +26,10 @@ public interface RestaurantService {
 
     List<Restaurant> getRestaurantsByRestaurantOwnerEmail(String email);
 
-    List<Restaurant> getRestaurantsWithBOGOOffer();
-
-    List<Restaurant> getRestaurantsWithLoyaltyPointsOffer();
-
-    List<Restaurant> getRestaurantsWithPercentageDiscountOffer();
+    List<Restaurant> getRestaurantsWithOffer();
 
     Restaurant createRestaurant(Restaurant restaurant);
 
     Restaurant convertToEntity(RestaurantDTO restaurantDTODTO);
 
-    // Other service methods as needed
 }

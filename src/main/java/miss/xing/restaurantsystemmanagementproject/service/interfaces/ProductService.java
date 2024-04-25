@@ -1,5 +1,6 @@
 package miss.xing.restaurantsystemmanagementproject.service.interfaces;
 
+import miss.xing.restaurantsystemmanagementproject.dto.ProductDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.Category;
 import miss.xing.restaurantsystemmanagementproject.entity.Product;
 
@@ -33,4 +34,5 @@ public interface ProductService {
     List<Product> getProductsByCategoryAndAvailability(Category category, boolean isAvailable);
 
 
+    Product convertToEntity(ProductDTO productDTO);
 }

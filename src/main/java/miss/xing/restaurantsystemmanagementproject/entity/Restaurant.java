@@ -1,6 +1,7 @@
 package miss.xing.restaurantsystemmanagementproject.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -45,21 +46,20 @@ public class Restaurant {
     private RestaurantOwner restaurantOwner;
 
     @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Category> categories;
 
     @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Server> servers;
 
     @ManyToMany(mappedBy = "restaurants",cascade = CascadeType.ALL)
     private List<Client> clients;
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    private List<BOGOOffer> bogoOffers;
+    private List<Offer> offers;
 
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    private List<LoyaltyPointsOffer> loyaltyPointsOffers;
-
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    private List<PercentageDiscountOffer> percentageDiscountOffers;
+    private List<Reward> rewards;
 
 }

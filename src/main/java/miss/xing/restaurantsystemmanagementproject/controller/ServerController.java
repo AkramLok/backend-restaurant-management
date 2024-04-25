@@ -1,6 +1,8 @@
 package miss.xing.restaurantsystemmanagementproject.controller;
 
+import miss.xing.restaurantsystemmanagementproject.dto.ServerDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.Server;
+import miss.xing.restaurantsystemmanagementproject.payload.response.MessageResponse;
 import miss.xing.restaurantsystemmanagementproject.service.interfaces.ServerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +23,7 @@ public class ServerController {
         this.serverService = serverService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Server>> getAllServers() {
         List<Server> servers = serverService.getAllServers();
         return new ResponseEntity<>(servers, HttpStatus.OK);
@@ -37,10 +39,10 @@ public class ServerController {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<Server> createServer(@RequestBody Server server) {
-        Server createdServer = serverService.saveServer(server);
-        return new ResponseEntity<>(createdServer, HttpStatus.CREATED);
+    @PostMapping("/create")
+    public ResponseEntity<?> createServer(@RequestBody ServerDTO serverDTO) {
+        Server createdServer = serverService.saveServer(serverService.convertToEntity(serverDTO));
+        return ResponseEntity.ok(new MessageResponse("Server of restaurant " + serverDTO.getRestaurantId() + " created successfully!"));
     }
 
     @PutMapping("/{id}")

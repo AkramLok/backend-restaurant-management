@@ -52,11 +52,6 @@ public class RestaurantController {
     @PostMapping("/create")
     public ResponseEntity<?> createRestaurant(@RequestBody RestaurantDTO restaurantDTO) {
         Restaurant createdRestaurant = restaurantService.createRestaurant(restaurantService.convertToEntity(restaurantDTO));
-        RestaurantOwner restaurantOwnerToUpdate = restaurantOwnerRepository.findByEmail(restaurantDTO.getOwnerEmail());
-        List<Restaurant> restaurantList = new ArrayList<>();
-        restaurantList.add(createdRestaurant);
-        restaurantOwnerToUpdate.setRestaurants(restaurantList);
-        restaurantOwnerService.updateRestaurantOwner(restaurantOwnerToUpdate.getId(),restaurantOwnerToUpdate);
         //return ResponseEntity.status(HttpStatus.CREATED).body(createdRestaurant);
         System.out.println("Restaurant Created !");
         System.out.println(restaurantDTO.getEmail()+" "+restaurantDTO.getPhone()+" "+ restaurantDTO.getStatus());

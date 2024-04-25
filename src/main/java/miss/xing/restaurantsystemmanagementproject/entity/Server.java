@@ -3,6 +3,7 @@ package miss.xing.restaurantsystemmanagementproject.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,10 +37,14 @@ public class Server {
     private String address;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @OneToMany(mappedBy = "server",cascade = CascadeType.ALL)
-    private List<Order> orders;
+    private List<OfferOrder> offerOrders;
+
+    @OneToMany(mappedBy = "server",cascade = CascadeType.ALL)
+    private List<ItemOrder> itemOrders;
 
 }

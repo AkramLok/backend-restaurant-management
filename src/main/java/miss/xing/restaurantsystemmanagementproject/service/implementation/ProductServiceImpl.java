@@ -1,7 +1,9 @@
 package miss.xing.restaurantsystemmanagementproject.service.implementation;
 
+import miss.xing.restaurantsystemmanagementproject.dto.ProductDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.Category;
 import miss.xing.restaurantsystemmanagementproject.entity.Product;
+import miss.xing.restaurantsystemmanagementproject.repository.CategoryRepository;
 import miss.xing.restaurantsystemmanagementproject.repository.ProductRepository;
 import miss.xing.restaurantsystemmanagementproject.service.interfaces.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,10 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
 
     @Autowired
     public ProductServiceImpl(ProductRepository productRepository) {
@@ -83,6 +89,20 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findByCategoryAndIsAvailable(category, isAvailable);
     }
 
+    @Override
+    public Product convertToEntity(ProductDTO productDTO) {
+        Product product = new Product();
+        product.setId(productDTO.getId());
+        product.setName(productDTO.getName());
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
+        product.setAvailable(productDTO.isAvailable());
 
-    // Implement other service methods as needed
-}
+        if (productDTO.getCategoryId() != null) {
+            Category category = categoryRepository.findById(productDTO.getCategoryId())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid category ID: " + productDTO.getCategoryId()));
+            product.setCategory(category);
+        }
+
+        return product;
+    }}

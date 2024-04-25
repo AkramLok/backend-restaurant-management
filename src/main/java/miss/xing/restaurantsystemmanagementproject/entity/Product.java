@@ -1,6 +1,7 @@
 package miss.xing.restaurantsystemmanagementproject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,20 +32,27 @@ public class Product {
     private boolean isAvailable;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "category_id")
     private Category category;
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     private List<Item> items;
 
-    @ManyToMany(mappedBy = "products",cascade = CascadeType.ALL)
-    private List<BOGOOffer> bogoOffers;
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    private Discount discount;
+
+    @ManyToMany(mappedBy = "productsToBuy")
+    private List<BxGy> bxGysToBuy;
+
+    @ManyToMany(mappedBy = "productsToGet")
+    private List<BxGy> bxGysToGet;
 
     @ManyToMany(mappedBy = "products",cascade = CascadeType.ALL)
-    private List<PercentageDiscountOffer> percentageDiscountOffers ;
+    private List<Custom> customs;
 
     @ManyToMany(mappedBy = "products",cascade = CascadeType.ALL)
-    private List<LoyaltyPointsOffer> loyaltyPointsPrograms;
+    private List<Reward> rewards;
 
 
 }

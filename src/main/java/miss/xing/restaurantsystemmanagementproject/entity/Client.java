@@ -50,6 +50,12 @@ public class Client {
     private List<Restaurant> restaurants;
 
     @OneToMany(mappedBy = "client",cascade = CascadeType.ALL)
-    private List<Order> orders;
+    private List<OfferOrder> offerOrders;
 
+    @OneToMany(mappedBy = "client",cascade = CascadeType.ALL)
+    private List<ItemOrder> itemOrders;
+
+
+    @OneToMany(mappedBy = "client",cascade = CascadeType.ALL)
+    private List<Reward> rewards;
 }

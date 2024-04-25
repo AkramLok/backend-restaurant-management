@@ -1,5 +1,6 @@
 package miss.xing.restaurantsystemmanagementproject.service.interfaces;
 
+import miss.xing.restaurantsystemmanagementproject.dto.ServerDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.Server;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public interface ServerService {
     List<Server> searchServersByEmail(String keyword);
     List<Server> getServersByRestaurant(Long restaurantId);
     List<Server> getServersByPhone(String phone);
+
+    Server convertToEntity(ServerDTO serverDTO);
 
     // Other service methods as needed
 }

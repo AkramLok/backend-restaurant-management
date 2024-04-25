@@ -77,25 +77,12 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<Restaurant> getRestaurantsWithBOGOOffer() {
+    public List<Restaurant> getRestaurantsWithOffer() {
         return restaurantRepository.findAll().stream()
-                .filter(restaurant -> !restaurant.getBogoOffers().isEmpty())
+                .filter(restaurant -> !restaurant.getOffers().isEmpty())
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<Restaurant> getRestaurantsWithLoyaltyPointsOffer() {
-        return restaurantRepository.findAll().stream()
-                .filter(restaurant -> !restaurant.getLoyaltyPointsOffers().isEmpty())
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Restaurant> getRestaurantsWithPercentageDiscountOffer() {
-        return restaurantRepository.findAll().stream()
-                .filter(restaurant -> !restaurant.getPercentageDiscountOffers().isEmpty())
-                .collect(Collectors.toList());
-    }
 
     @Override
     public Restaurant createRestaurant(Restaurant restaurant) {
@@ -117,7 +104,6 @@ public class RestaurantServiceImpl implements RestaurantService {
                 restaurantDTO.getOpeningHours(),
                 restaurantDTO.getStatus(),
                 restaurantOwnerRepository.findByEmail(restaurantDTO.getOwnerEmail()),
-                null,
                 null,
                 null,
                 null,
