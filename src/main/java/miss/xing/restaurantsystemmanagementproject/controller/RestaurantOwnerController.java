@@ -1,12 +1,16 @@
 package miss.xing.restaurantsystemmanagementproject.controller;
 
+import miss.xing.restaurantsystemmanagementproject.dto.RestaurantOwnerDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.RestaurantOwner;
 import miss.xing.restaurantsystemmanagementproject.service.interfaces.RestaurantOwnerService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -22,8 +26,14 @@ public class RestaurantOwnerController {
     }
 
     @GetMapping("/all")
-    public List<RestaurantOwner> getAllRestaurantOwners() {
-        return restaurantOwnerService.getAllRestaurantOwners();
+    public List<RestaurantOwnerDTO> getAllRestaurantOwners() {
+        ModelMapper modelMapper = new ModelMapper();
+        List<RestaurantOwner> restaurantOwnerList = restaurantOwnerService.getAllRestaurantOwners();
+        List<RestaurantOwnerDTO> restaurantOwnerDTOList = new ArrayList<>();
+        for (RestaurantOwner restaurantOwner : restaurantOwnerList) {
+            restaurantOwnerDTOList.add(modelMapper.map(restaurantOwner,RestaurantOwnerDTO.class));
+        }
+        return restaurantOwnerDTOList;
     }
 
     @GetMapping("/{restaurantOwnerId}")

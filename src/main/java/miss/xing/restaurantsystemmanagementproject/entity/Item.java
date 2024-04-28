@@ -1,6 +1,8 @@
 package miss.xing.restaurantsystemmanagementproject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,9 +28,11 @@ public class Item {
 
     @ManyToOne
     @JoinColumn(name = "item_order_id")
+    @JsonBackReference
     private ItemOrder item_order;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
+    @JsonBackReference
     private Product product;
 }

@@ -1,5 +1,4 @@
 package miss.xing.restaurantsystemmanagementproject.entity;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,12 +10,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@DiscriminatorValue("discount")
-public class Discount extends Offer {
-    private double discountPercentage;
+public class BxGyProductsToGet {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private int quantityGet;
 
     @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "product_id")
+    private BxGy bxGy;
+
+    @ManyToOne
     private Product product;
+
 }

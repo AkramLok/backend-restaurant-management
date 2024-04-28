@@ -15,22 +15,10 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("bxgy")
 public class BxGy extends Offer {
-    private int buyQuantity;
-    private int getQuantity;
 
-    @ManyToMany
-    @JoinTable(
-            name = "bxgy_products_To_Buy",
-            joinColumns = @JoinColumn(name = "bxgy_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_to_buy_id")
-    )
-    private List<Product> productsToBuy;
+    @OneToMany(mappedBy = "bxGy")
+    private List<BxGyProductsToBuy> itemsProductsToBuy;
 
-    @ManyToMany
-    @JoinTable(
-            name = "bxgy_products_To_Get",
-            joinColumns = @JoinColumn(name = "bxgy_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_to_get_id")
-    )
-    private List<Product> productsToGet;
+    @OneToMany(mappedBy = "bxGy")
+    private List<BxGyProductsToGet> itemsProductsToGet;
 }

@@ -6,6 +6,7 @@ import miss.xing.restaurantsystemmanagementproject.entity.Restaurant;
 import miss.xing.restaurantsystemmanagementproject.entity.RestaurantOwner;
 import miss.xing.restaurantsystemmanagementproject.repository.RestaurantOwnerRepository;
 import miss.xing.restaurantsystemmanagementproject.repository.RestaurantRepository;
+import miss.xing.restaurantsystemmanagementproject.service.interfaces.RestaurantOwnerService;
 import miss.xing.restaurantsystemmanagementproject.service.interfaces.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Autowired
     public RestaurantOwnerRepository restaurantOwnerRepository;
+
+    @Autowired
+    public RestaurantOwnerService restaurantOwnerService;
 
     @Autowired
     public RestaurantServiceImpl(RestaurantRepository restaurantRepository) {
@@ -103,7 +107,7 @@ public class RestaurantServiceImpl implements RestaurantService {
                 restaurantDTO.getEmail(),
                 restaurantDTO.getOpeningHours(),
                 restaurantDTO.getStatus(),
-                restaurantOwnerRepository.findByEmail(restaurantDTO.getOwnerEmail()),
+                restaurantOwnerService.getRestaurantOwnerById(restaurantDTO.getOwnerId()),
                 null,
                 null,
                 null,

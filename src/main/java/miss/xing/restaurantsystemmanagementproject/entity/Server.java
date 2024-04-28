@@ -4,6 +4,7 @@ package miss.xing.restaurantsystemmanagementproject.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -42,6 +43,7 @@ public class Server {
     private Restaurant restaurant;
 
     @OneToMany(mappedBy = "server",cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<OfferOrder> offerOrders;
 
     @OneToMany(mappedBy = "server",cascade = CascadeType.ALL)

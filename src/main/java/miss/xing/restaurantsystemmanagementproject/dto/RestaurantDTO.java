@@ -1,10 +1,12 @@
 package miss.xing.restaurantsystemmanagementproject.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
+@Data
 public class RestaurantDTO {
     private Long id;
     private String name;
@@ -13,21 +15,10 @@ public class RestaurantDTO {
     private String email;
     private String openingHours;
     private String status;
-    private String ownerEmail;
+    private Long ownerId;
 
 
     // Constructors
     public RestaurantDTO() {
     }
-    public RestaurantDTO(Long id, String name, String location, String phone, String email, String openingHours, String status, String ownerEmail) {
-        this.id = id;
-        this.name = name;
-        this.location = location;
-        this.phone = phone;
-        this.email = email;
-        this.openingHours = openingHours;
-        this.status = status;
-        this.ownerEmail = ownerEmail;
-    }
-
 }

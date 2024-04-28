@@ -1,5 +1,7 @@
 package miss.xing.restaurantsystemmanagementproject.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,9 +31,11 @@ public abstract class Offer {
     private  Date validUntil;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @OneToMany(mappedBy = "offer",cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<OfferOrder> offerOrders;
 }

@@ -1,12 +1,14 @@
 package miss.xing.restaurantsystemmanagementproject.controller;
 
 import miss.xing.restaurantsystemmanagementproject.dto.RestaurantDTO;
+import miss.xing.restaurantsystemmanagementproject.dto.RestaurantOwnerDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.Restaurant;
 import miss.xing.restaurantsystemmanagementproject.entity.RestaurantOwner;
 import miss.xing.restaurantsystemmanagementproject.payload.response.MessageResponse;
 import miss.xing.restaurantsystemmanagementproject.repository.RestaurantOwnerRepository;
 import miss.xing.restaurantsystemmanagementproject.service.interfaces.RestaurantOwnerService;
 import miss.xing.restaurantsystemmanagementproject.service.interfaces.RestaurantService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,13 +36,25 @@ public class RestaurantController {
     public RestaurantOwnerService restaurantOwnerService;
 
     @GetMapping("/all")
-    public List<Restaurant> getAllRestaurants() {
-        return restaurantService.getAllRestaurants();
+    public List<RestaurantDTO> getAllRestaurants() {
+        ModelMapper modelMapper = new ModelMapper();
+        List<Restaurant> restaurantList = restaurantService.getAllRestaurants();
+        List<RestaurantDTO> restaurantDTOList = new ArrayList<>();
+        for (Restaurant restaurant : restaurantList) {
+            restaurantDTOList.add(modelMapper.map(restaurant,RestaurantDTO.class));
+        }
+        return restaurantDTOList;
     }
 
     @GetMapping("/all/{id}")
-    public List<Restaurant> getAllRestaurantsById(@PathVariable Long id) {
-        return restaurantService.getRestaurantsByOwner(restaurantOwnerService.getRestaurantOwnerById(id));
+    public List<RestaurantDTO> getAllRestaurantsById(@PathVariable Long id) {
+        ModelMapper modelMapper = new ModelMapper();
+        List<Restaurant> restaurantList = restaurantService.getRestaurantsByOwner(restaurantOwnerService.getRestaurantOwnerById(id));
+        List<RestaurantDTO> restaurantDTOList = new ArrayList<>();
+        for (Restaurant restaurant : restaurantList) {
+            restaurantDTOList.add(modelMapper.map(restaurant,RestaurantDTO.class));
+        }
+        return restaurantDTOList;
     }
 
     @GetMapping("/{id}")
@@ -51,7 +65,10 @@ public class RestaurantController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createRestaurant(@RequestBody RestaurantDTO restaurantDTO) {
-        Restaurant createdRestaurant = restaurantService.createRestaurant(restaurantService.convertToEntity(restaurantDTO));
+        ModelMapper modelMapper = new ModelMapper();
+        Restaurant restaurantConverted = modelMapper.map(restaurantDTO,Restaurant.class);
+        restaurantService.createRestaurant(restaurantConverted);
+        //Restaurant createdRestaurant = restaurantService.createRestaurant(restaurantService.convertToEntity(restaurantDTO));
         //return ResponseEntity.status(HttpStatus.CREATED).body(createdRestaurant);
         System.out.println("Restaurant Created !");
         System.out.println(restaurantDTO.getEmail()+" "+restaurantDTO.getPhone()+" "+ restaurantDTO.getStatus());

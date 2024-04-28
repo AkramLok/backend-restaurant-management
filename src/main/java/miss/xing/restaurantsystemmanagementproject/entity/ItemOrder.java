@@ -1,6 +1,7 @@
 package miss.xing.restaurantsystemmanagementproject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "orders")
+@Table(name = "item_orders")
 public class ItemOrder {
 
     @Id
@@ -23,6 +24,7 @@ public class ItemOrder {
     private Long id;
     private Double totalPrice;
     private Integer addedPoints;
+    private boolean isPay;
     @Temporal(TemporalType.DATE)
     @Column(name = "order_date")
     private Date orderDate;

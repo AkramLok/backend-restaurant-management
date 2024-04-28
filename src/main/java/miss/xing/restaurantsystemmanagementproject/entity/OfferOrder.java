@@ -1,6 +1,7 @@
 package miss.xing.restaurantsystemmanagementproject.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +24,7 @@ public class OfferOrder {
     private Long id;
     private Double totalPrice;
     private Integer addedPoints;
+    private boolean isPay;
     @Temporal(TemporalType.DATE)
     @Column(name = "order_date")
     private Date orderDate;
@@ -31,15 +33,18 @@ public class OfferOrder {
 
     @ManyToOne
     @JoinColumn(name = "server_id")
+    @JsonBackReference
     private Server server;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
+    @JsonBackReference
     private Client client;
 
 
     @ManyToOne
     @JoinColumn(name = "offer_id")
+    @JsonBackReference
     private Offer offer;
 
 
