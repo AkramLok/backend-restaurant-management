@@ -10,7 +10,13 @@ import miss.xing.restaurantsystemmanagementproject.service.interfaces.Restaurant
 import miss.xing.restaurantsystemmanagementproject.service.interfaces.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +24,17 @@ import java.util.stream.Collectors;
 public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+
+    private final Path root = Paths.get("uploads");
+
+    @Override
+    public void init() {
+        try {
+            Files.createDirectories(root);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not initialize folder for upload!");
+        }
+    }
 
     @Autowired
     public RestaurantOwnerRepository restaurantOwnerRepository;
@@ -41,8 +58,22 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public void saveRestaurant(Restaurant restaurant) {
+    public void saveRestaurant(Restaurant restaurant, MultipartFile file) {
+        init();
+        saveRestaurantImage(file);
+        restaurant.setImageurl(file.getOriginalFilename());
         restaurantRepository.save(restaurant);
+    }
+
+    public void saveRestaurantImage(MultipartFile file) {
+        try {
+            Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
+        } catch (Exception e) {
+            if (e instanceof FileAlreadyExistsException) {
+                throw new RuntimeException("A file of that name already exists.");
+            }
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @Override
@@ -107,6 +138,7 @@ public class RestaurantServiceImpl implements RestaurantService {
                 restaurantDTO.getEmail(),
                 restaurantDTO.getOpeningHours(),
                 restaurantDTO.getStatus(),
+                null,
                 restaurantOwnerService.getRestaurantOwnerById(restaurantDTO.getOwnerId()),
                 null,
                 null,

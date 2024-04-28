@@ -1,5 +1,7 @@
 package miss.xing.restaurantsystemmanagementproject.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import miss.xing.restaurantsystemmanagementproject.dto.CategoryDTO;
 import miss.xing.restaurantsystemmanagementproject.dto.RestaurantDTO;
 import miss.xing.restaurantsystemmanagementproject.dto.RestaurantOwnerDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.Restaurant;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,10 +67,22 @@ public class RestaurantController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createRestaurant(@RequestBody RestaurantDTO restaurantDTO) {
+    public ResponseEntity<?> createRestaurant(String restaurantDTOString, @RequestParam("file") MultipartFile file) {
+        RestaurantDTO restaurantDTO = null;
+        try {
+            System.out.println("qfddssssssssssssssssss "+restaurantDTOString);
+            restaurantDTO  = new ObjectMapper().readValue(restaurantDTOString, RestaurantDTO.class);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        if (file == null || file.isEmpty()) {
+            throw new IllegalArgumentException("File cannot be null or empty.");
+        }
         ModelMapper modelMapper = new ModelMapper();
         Restaurant restaurantConverted = modelMapper.map(restaurantDTO,Restaurant.class);
-        restaurantService.createRestaurant(restaurantConverted);
+        restaurantService.saveRestaurant(restaurantConverted, file);
         //Restaurant createdRestaurant = restaurantService.createRestaurant(restaurantService.convertToEntity(restaurantDTO));
         //return ResponseEntity.status(HttpStatus.CREATED).body(createdRestaurant);
         System.out.println("Restaurant Created !");

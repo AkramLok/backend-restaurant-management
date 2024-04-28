@@ -4,15 +4,20 @@ import miss.xing.restaurantsystemmanagementproject.dto.RestaurantDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.Client;
 import miss.xing.restaurantsystemmanagementproject.entity.Restaurant;
 import miss.xing.restaurantsystemmanagementproject.entity.RestaurantOwner;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface RestaurantService {
+    void init();
+
     List<Restaurant> getAllRestaurants();
 
     Restaurant getRestaurantById(Long id);
 
-    void saveRestaurant(Restaurant restaurant);
+    //void saveRestaurant(Restaurant restaurant);
+
+    void saveRestaurant(Restaurant restaurant, MultipartFile file);
 
     Restaurant updateRestaurant(Long id, Restaurant restaurant);
 

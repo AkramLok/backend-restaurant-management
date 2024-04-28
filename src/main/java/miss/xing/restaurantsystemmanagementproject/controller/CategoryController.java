@@ -1,5 +1,6 @@
 package miss.xing.restaurantsystemmanagementproject.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import miss.xing.restaurantsystemmanagementproject.dto.CategoryDTO;
 import miss.xing.restaurantsystemmanagementproject.dto.RestaurantDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.Category;
@@ -45,12 +46,19 @@ public class CategoryController {
         return categorieDTOList;
     }
 
+    /*@PostMapping(value = Constant.API_INITIAL + "/uploadFile")
+    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file,String jsonFileVo) {
+        FileUploadVo fileUploadVo = null;
+    }
+    try { fileUploadVo = new ObjectMapper().readValue(jsonFileVo, FileUploadVo.class); }
+    catch (Exception e) { e.printStackTrace(); }*/
+
     @PostMapping("/create")
     public ResponseEntity<?> createCategory(@RequestBody CategoryDTO categoryDTO) {
         ModelMapper modelMapper = new ModelMapper();
         Category categoryConverted = modelMapper.map(categoryDTO,Category.class);
         categoryService.saveCategory(categoryConverted);
         //Category category = categoryService.saveCategory(categoryService.convertToEntity(categoryDTO));
-        return ResponseEntity.ok(new MessageResponse("Category of restaurant  created successfully!"));
+        return ResponseEntity.ok(new MessageResponse("Category of restaurant "+ categoryDTO.getRestaurantId() +" created successfully!"));
     }
 }

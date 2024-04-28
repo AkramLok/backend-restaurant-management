@@ -40,6 +40,9 @@ public class Restaurant {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "image")
+    private String imageurl;
+
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "owner_id")
