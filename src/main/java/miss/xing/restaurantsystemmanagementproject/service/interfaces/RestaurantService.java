@@ -4,9 +4,12 @@ import miss.xing.restaurantsystemmanagementproject.dto.RestaurantDTO;
 import miss.xing.restaurantsystemmanagementproject.entity.Client;
 import miss.xing.restaurantsystemmanagementproject.entity.Restaurant;
 import miss.xing.restaurantsystemmanagementproject.entity.RestaurantOwner;
+import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Stream;
 
 public interface RestaurantService {
     void init();
@@ -17,7 +20,11 @@ public interface RestaurantService {
 
     //void saveRestaurant(Restaurant restaurant);
 
-    void saveRestaurant(Restaurant restaurant, MultipartFile file);
+    void saveRestaurant(String restaurantDTOString, MultipartFile file);
+
+    Stream<Path> loadAll();
+
+    Resource load(String filename);
 
     Restaurant updateRestaurant(Long id, Restaurant restaurant);
 

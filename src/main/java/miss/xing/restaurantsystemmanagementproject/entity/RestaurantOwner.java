@@ -33,7 +33,6 @@ public class RestaurantOwner {
     private String address;
 
     @OneToMany(mappedBy = "restaurantOwner",cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Restaurant> restaurants;
 
 }

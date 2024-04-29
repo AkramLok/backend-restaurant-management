@@ -38,12 +38,10 @@ public class Server {
     private String address;
 
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @OneToMany(mappedBy = "server",cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<OfferOrder> offerOrders;
 
     @OneToMany(mappedBy = "server",cascade = CascadeType.ALL)

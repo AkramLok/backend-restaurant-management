@@ -2,11 +2,14 @@ package miss.xing.restaurantsystemmanagementproject.security.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.io.DecodingException;
 import io.jsonwebtoken.security.Keys;
 import miss.xing.restaurantsystemmanagementproject.security.services.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -56,7 +59,12 @@ public class JwtUtils {
       logger.error("JWT token is unsupported: {}", e.getMessage());
     } catch (IllegalArgumentException e) {
       logger.error("JWT claims string is empty: {}", e.getMessage());
-    }
+    } catch (DecodingException e) {
+      if (e.getMessage().contains("Illegal base64url character: ' '")) {
+        logger.error("Invalid JWT token: Illegal base64url character detected. ", e.getMessage());
+      } else {
+        logger.error("Error decoding JWT token: ", e.getMessage());
+      }    }
 
     return false;
   }

@@ -52,7 +52,6 @@ public class Client {
     private List<Restaurant> restaurants;
 
     @OneToMany(mappedBy = "client",cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<OfferOrder> offerOrders;
 
     @OneToMany(mappedBy = "client",cascade = CascadeType.ALL)

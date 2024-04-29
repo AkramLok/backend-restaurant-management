@@ -28,11 +28,9 @@ public class Item {
 
     @ManyToOne
     @JoinColumn(name = "item_order_id")
-    @JsonBackReference
     private ItemOrder item_order;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    @JsonBackReference
     private Product product;
 }

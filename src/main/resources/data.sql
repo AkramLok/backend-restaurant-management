@@ -17,9 +17,9 @@ INSERT INTO restaurant_owners (address, email, first_name, last_name, phone) VAL
                                                                                  ('Owner Address 2', 'owner2@example.com', 'Owner First Name 2', 'Owner Last Name 2', '9876543210');
 
 
-INSERT INTO restaurants (email, location, name, opening_hours, phone, status, owner_id) VALUES
-                                                                                            ('restaurant1@example.com', 'Location 1', 'Restaurant 1', '9:00 AM - 10:00 PM', '1112223333', 'Open', 1),
-                                                                                            ('restaurant2@example.com', 'Location 2', 'Restaurant 2', '8:00 AM - 9:00 PM', '4445556666', 'Closed', 2);
+INSERT INTO restaurants (email, image, location, name, opening_hours, phone,  status, owner_id) VALUES
+                                                                                            ('restaurant1@example.com', '1.jpg','Location 1', 'Restaurant 1', '9:00 AM - 10:00 PM', '1112223333',  'Open', 1),
+                                                                                            ('restaurant2@example.com', '2.jpg','Location 2', 'Restaurant 2', '8:00 AM - 9:00 PM', '4445556666', 'Closed', 2);
 INSERT INTO servers (address, email, first_name, last_name, phone, restaurant_id) VALUES
                                                                                       ('Server Address 1', 'server1@example.com', 'Server First Name 1', 'Server Last Name 1', '1112223333', 1),
                                                                                       ('Server Address 2', 'server2@example.com', 'Server First Name 2', 'Server Last Name 2', '4445556666', 2);

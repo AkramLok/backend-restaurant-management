@@ -1,10 +1,7 @@
 package miss.xing.restaurantsystemmanagementproject.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,25 +32,20 @@ public class Product {
     private boolean isAvailable;
 
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "category_id")
     private Category category;
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Item> items;
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<Discount> discount;
 
 
     @ManyToMany(mappedBy = "products",cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Custom> customs;
 
     @ManyToMany(mappedBy = "products",cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Reward> rewards;
 
 

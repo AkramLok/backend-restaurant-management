@@ -33,18 +33,15 @@ public class OfferOrder {
 
     @ManyToOne
     @JoinColumn(name = "server_id")
-    @JsonBackReference
     private Server server;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
-    @JsonBackReference
     private Client client;
 
 
     @ManyToOne
     @JoinColumn(name = "offer_id")
-    @JsonBackReference
     private Offer offer;
 
 

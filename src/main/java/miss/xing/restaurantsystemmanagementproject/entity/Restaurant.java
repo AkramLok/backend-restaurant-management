@@ -44,7 +44,6 @@ public class Restaurant {
     private String imageurl;
 
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "owner_id")
     private RestaurantOwner restaurantOwner;
 

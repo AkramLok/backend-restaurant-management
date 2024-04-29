@@ -13,6 +13,7 @@ public class RestaurantDTO {
     private String location;
     private String phone;
     private String email;
+    private String imageurl;
     private String openingHours;
     private String status;
     private Long ownerId;
